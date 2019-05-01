@@ -4,3 +4,5 @@
     - java
     - ntp
     - hostname
+    - ulimit
+    - vmswapiness

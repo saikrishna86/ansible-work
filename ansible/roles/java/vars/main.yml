@@ -1,0 +1,4 @@
+---
+download_url: https://s3.amazonaws.com/java8-self/jdk-8u211-linux-x64.rpm
+download_folder: /opt
+java_archive: "{{download_folder}}/jdk-8u211-linux-x64.rpm"

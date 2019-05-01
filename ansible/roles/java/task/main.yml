@@ -1,0 +1,22 @@
+---
+- name: upgrade all packages
+  yum:
+    name: '*'
+    state: latest
+    
+- name: Install linux ELF Package to install java in centos
+  yum:
+    name: ld-linux.so.2
+    state: present
+
+- name: Download Java
+  command: "wget {{download_url}} -O {{java_archive}}"
+
+- name: install the java rpm
+  yum:
+    name: "{{ java_archive }}"
+    state: present
+  when: ansible_distribution == 'CentOS'
+
+- name: Clean up
+  file: state=absent path={{java_archive}}

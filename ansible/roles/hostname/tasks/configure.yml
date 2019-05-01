@@ -1,0 +1,20 @@
+# Copyright (c) Ontic. (http://www.ontic.com.au). All rights reserved.
+# See the COPYING file bundled with this package for license details.
+
+---
+
+- name: 'Hostname | Configure hostname.'
+  become: yes
+  hostname:
+    name: '{{ hostname }}'
+  when: 'hostname | default(None) != None'
+
+- name: 'Hostname | Configure hosts file.'
+  become: yes
+  template:
+    src: '{{ hostname_hosts_template }}'
+    dest: '/etc/hosts'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  when: 'hostname | default(None) != None and hostname_hosts | default(None) != None'

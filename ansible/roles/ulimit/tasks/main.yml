@@ -1,0 +1,16 @@
+- name: configure system settings, file descriptors and number of threads
+  pam_limits:
+    domain: "*"
+    limit_type: "{{item.limit_type}}"
+    limit_item: "{{item.limit_item}}"
+    value: "{{item.value}}"
+  with_items:
+    - { limit_type: 'soft', limit_item: 'nofile', value: "{{ SOFT_LIMIT }}" }
+    - { limit_type: 'hard', limit_item: 'nofile', value: "{{ HARD_LIMIT }}" }
+- name: reload settings from all system configuration files
+  shell: sysctl --system
+
+- name: Set sysctl File Limits
+  copy:
+    src: filesize.conf
+    dest: /etc/sysctl.d

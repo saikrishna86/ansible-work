@@ -1,8 +1,7 @@
-- hosts: local
+- hosts: cloudera-nodes
   become: yes
   roles:
-    - java
+    - openjdk-java
     - ntp
-    - hostname
     - ulimit
     - vmswapiness
